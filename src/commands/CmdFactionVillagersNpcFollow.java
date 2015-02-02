@@ -11,12 +11,12 @@ import characters.NPCListener;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityNpcFollow extends MCCommand{
+public class CmdFactionVillagersNpcFollow extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityNpcFollow()
+	public CmdFactionVillagersNpcFollow()
 	{
 		// Aliases
 		this.addAliases("f", "follow");

@@ -1,27 +1,27 @@
 package commands;
 
-import org.bukkit.inventory.ItemStack;
+import main.FactionVillagers;
+
+import org.bukkit.ChatColor;
 
 import com.massivecraft.massivecore.util.Txt;
 
-
-
-public class CmdMCityFullStack extends MCCommand{
+public class CmdFactionVillagersReload extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityFullStack()
+	public CmdFactionVillagersReload()
 	{
 		// Aliases
-		this.addAliases("f", "fullstack");
+		this.addAliases("rel", "reload");
+
+		this.setDesc("reload the config of the plugin");
+		this.setHelp("This command reloads the config");
 
 		// Args
-		this.addOptionalArg("optionalArg", "");
-		
-		this.setDesc("make item in hand a stack of 64");
-		this.setHelp("for OPs only");
-		
+//		this.addOptionalArg("page", "1");
+
 		// Requirements
 //		this.addRequirements(ReqFactionsEnabled.get());
 //		this.addRequirements(ReqHasPerm.get(Perm.LIST.node));
@@ -36,9 +36,8 @@ public class CmdMCityFullStack extends MCCommand{
 	{
 		if(player.isOp())
 		{
-			ItemStack item = player.getItemInHand();
-			item.setAmount(64);
-			player.setItemInHand(item);
+			FactionVillagers.getCurrentPlugin().reloadMyConfig();
+			sendMessage(ChatColor.GREEN + "Reloaded!");
 		}
 		else
 		{

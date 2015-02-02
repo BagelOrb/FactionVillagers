@@ -1,6 +1,6 @@
 package commands;
 
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -16,12 +16,12 @@ import com.massivecraft.massivecore.util.Txt;
  *
  */
 @Deprecated
-public class CmdMCityNpcGo extends MCCommand{
+public class CmdFactionVillagersNpcGo extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityNpcGo()
+	public CmdFactionVillagersNpcGo()
 	{
 		// Aliases
 		this.addAliases("g", "go");
@@ -64,7 +64,7 @@ public class CmdMCityNpcGo extends MCCommand{
 			NPC npc;
 			if (npcid == -1){
 				//sender didn't specify an id, use his selected NPC.
-				npc =	((Citizens)	MCity.getCurrentPlugin().getServer().getPluginManager().getPlugin("Citizens")).getNPCSelector().getSelected(sender);
+				npc =	((Citizens)	FactionVillagers.getCurrentPlugin().getServer().getPluginManager().getPlugin("Citizens")).getNPCSelector().getSelected(sender);
 				if(npc != null ){
 					// Gets NPC Selected for this sender
 					npcid = npc.getId();

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -330,7 +330,7 @@ public abstract class BuildingRequirement {
 			// old code: (checking all buildings of all cities...
 			for (Block borderBlock : building.airSpaceChecker.borderBlocks)
 			{
-				for (City city : MCity.allCities) // for each building in the world (one building can cover multiple factions!
+				for (City city : FactionVillagers.allCities) // for each building in the world (one building can cover multiple factions!
 				for (Building otherBuilding : city.getAllBuildings())
 				{
 					if (otherBuilding == building) continue;

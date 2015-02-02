@@ -23,7 +23,7 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -73,7 +73,7 @@ public class City implements JsonAble<City> {
 	
 	public CityStatistics statistics; // TODO: persist!
 
-	private static final long timeBetweenImmigrantChecks = MCity.getCurrentPlugin().getConfig().getLong("immigration.timeBetweenImmigrantChecks");
+	private static final long timeBetweenImmigrantChecks = FactionVillagers.getCurrentPlugin().getConfig().getLong("immigration.timeBetweenImmigrantChecks");
 
 	
 	public ItemStack getStatisticsBook() {
@@ -88,14 +88,14 @@ public class City implements JsonAble<City> {
 	}
 	
 	@Deprecated public City() { // only used in reflection to get an object of this type! no 
-		checkImmigrants.runTaskTimer(MCity.getCurrentPlugin(), random.nextInt(500)+20, timeBetweenImmigrantChecks );
+		checkImmigrants.runTaskTimer(FactionVillagers.getCurrentPlugin(), random.nextInt(500)+20, timeBetweenImmigrantChecks );
 	}
 	public City(World w, String facID) {
 		factionID = facID;
 		for (BuildingType type : BuildingType.values())
 			buildings.put(type, new LinkedList<Building>());
 		
-		checkImmigrants.runTaskTimer(MCity.getCurrentPlugin(), random.nextInt(500)+20, timeBetweenImmigrantChecks );
+		checkImmigrants.runTaskTimer(FactionVillagers.getCurrentPlugin(), random.nextInt(500)+20, timeBetweenImmigrantChecks );
 	}
 	
 	private BukkitRunnable checkImmigrants = new BukkitRunnable() {
@@ -149,14 +149,14 @@ public class City implements JsonAble<City> {
 		
 		
 	public void create() {
-		MCity.allCities.add(this);
+		FactionVillagers.allCities.add(this);
 		FactionUtils.factionIDToCity.put(factionID, this);
 		statistics = new CityStatistics(this);
 	}
 	public void destroy() {
 		for (Building b : getAllBuildings())
 			b.destroy();
-		MCity.allCities.remove(this);
+		FactionVillagers.allCities.remove(this);
 		new File("saves\\"+factionID).delete();
 	}
 
@@ -301,8 +301,8 @@ public class City implements JsonAble<City> {
 	}
 
 	
-	private static double overcrowdedBasePower = MCity.getCurrentPlugin().getConfig().getDouble("happiness.overcrowdedBasePower");
-	private static double happinessFromEachUnemployed = MCity.getCurrentPlugin().getConfig().getDouble("happiness.happinessFromEachUnemployed");
+	private static double overcrowdedBasePower = FactionVillagers.getCurrentPlugin().getConfig().getDouble("happiness.overcrowdedBasePower");
+	private static double happinessFromEachUnemployed = FactionVillagers.getCurrentPlugin().getConfig().getDouble("happiness.happinessFromEachUnemployed");
 
 	public double getNpcHappinessEnhancement() {
 		int numberOfEmployeds = 0;

@@ -47,10 +47,10 @@ import city.City;
 
 import com.massivecraft.massivecore.MassivePlugin;
 import com.massivecraft.massivecore.util.Txt;
-import commands.CmdMCity;
+import commands.CmdFactionVillagers;
 
 
-public class MCity extends MassivePlugin implements JsonAble<MCity> {
+public class FactionVillagers extends MassivePlugin implements JsonAble<FactionVillagers> {
 	
 
 	static {
@@ -88,14 +88,14 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 
 	public static boolean keepFactionChunksLoaded;
 	
-	public static MCity getCurrentPlugin() {
+	public static FactionVillagers getCurrentPlugin() {
 //		return currentPlugin; 
-		return (MCity) Bukkit.getServer().getPluginManager().getPlugin("MCity"); 
+		return (FactionVillagers) Bukkit.getServer().getPluginManager().getPlugin("FactionVillagers"); 
 	}
 
 
-//	public static void setCurrentPlugin(MCity currentPlugin) {
-//		MCity.currentPlugin = currentPlugin;
+//	public static void setCurrentPlugin(FactionVillagers currentPlugin) {
+//		FactionVillagers.currentPlugin = currentPlugin;
 //	}
 
 
@@ -158,8 +158,8 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 		{
 		    try { // para Jar code jabbed from inet
 		        final File[] libs = new File[] {
-		                new File(MCity.getCurrentPlugin().getDataFolder(), "lib\\javax.json-1.0.3.jar")
-		                , new File(MCity.getCurrentPlugin().getDataFolder(), "lib\\commons-io-2.4.jar") 
+		                new File(FactionVillagers.getCurrentPlugin().getDataFolder(), "lib\\javax.json-1.0.3.jar")
+		                , new File(FactionVillagers.getCurrentPlugin().getDataFolder(), "lib\\commons-io-2.4.jar") 
 		                };
 		        for (final File lib : libs) {
 		            if (!lib.exists()) {
@@ -169,10 +169,10 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 		        }
 		        for (final File lib : libs) {
 		            if (!lib.exists()) {
-		            	MCity.getCurrentPlugin().getLogger().warning(
+		            	FactionVillagers.getCurrentPlugin().getLogger().warning(
 		                        "There was a critical error loading My plugin! Could not find lib: "
 		                                + lib.getName());
-		                Bukkit.getServer().getPluginManager().disablePlugin(MCity.getCurrentPlugin());
+		                Bukkit.getServer().getPluginManager().disablePlugin(FactionVillagers.getCurrentPlugin());
 		                return;
 		            }
 		            addClassPath(JarUtils.getJarUrl(lib));
@@ -236,7 +236,7 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
         
         //MCCharacters OnEnable
         
-		outerCommand = new CmdMCity();
+		outerCommand = new CmdFactionVillagers();
 		outerCommand.register(getCurrentPlugin());
 		
 		
@@ -293,12 +293,12 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 	
 	public void reloadMyConfig(){
 		//This copies the config.yml included in your .jar to the folder for this plugin, only if it does not exist.
-		MCity.getCurrentPlugin().saveDefaultConfig();
+		FactionVillagers.getCurrentPlugin().saveDefaultConfig();
 		//load this config.yml into memory
-		MCity.getCurrentPlugin().reloadConfig();
+		FactionVillagers.getCurrentPlugin().reloadConfig();
 	}
 	
-	public CmdMCity outerCommand;
+	public CmdFactionVillagers outerCommand;
 	
 	public void onDisable() { 
 		IO.saveCities();
@@ -313,8 +313,6 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 	 */
 	
 	public static City getCity(Player player) {
-//		return MCity.daCity;
-		//?		// TODO : use code below, when we have implemented having more cities / not using daCity anymore.
 		return FactionUtils.factionIDToCity.get(FactionUtils.getFaction(player).getId());
 	}
 
@@ -326,7 +324,7 @@ public class MCity extends MassivePlugin implements JsonAble<MCity> {
 
 
 	@Override
-	public MCity fromJsonObject(JsonObject o) throws IllegalArgumentException,
+	public FactionVillagers fromJsonObject(JsonObject o) throws IllegalArgumentException,
 			SecurityException, InstantiationException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException {
 		IO.pluginFromJsonObject(this, o); 

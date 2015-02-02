@@ -16,7 +16,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Inventory;
@@ -41,9 +41,9 @@ import factions.FactionUtils;
 public class TownHall extends BuildingWithTradeVillager {
 
 	static final String configYmlPath = configYmlPath_building+".townHall";
-	private static final int numberOfStartingUnemployeds = MCity.getCurrentPlugin().getConfig().getInt(configYmlPath+".numberOfStartingUnemployeds");
-	private static final boolean showDebugTrades = MCity.getCurrentPlugin().getConfig().getBoolean(configYmlPath+".showDebugTrades");
-//	private static final int numberOfBedBlocks = MCity.getCurrentPlugin().getConfig().getInt(configYmlPath+".numberOfBedBlocks");
+	private static final int numberOfStartingUnemployeds = FactionVillagers.getCurrentPlugin().getConfig().getInt(configYmlPath+".numberOfStartingUnemployeds");
+	private static final boolean showDebugTrades = FactionVillagers.getCurrentPlugin().getConfig().getBoolean(configYmlPath+".showDebugTrades");
+//	private static final int numberOfBedBlocks = FactionVillagers.getCurrentPlugin().getConfig().getInt(configYmlPath+".numberOfBedBlocks");
 	
 	@Override
 	public int getNumberOfVillagersNeeded() {

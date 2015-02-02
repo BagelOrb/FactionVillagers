@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -73,7 +73,7 @@ public class StatisticsBookListener implements Listener
 				int hours = Integer.parseInt(hm[0]);
 				int minutes = Integer.parseInt(hm[1]);
 				int totMin = minutes + hours*60;
-				Tuple<Long, Long> hmNow = ServerUtils.mcTimeToHoursMinutes(MCity.defaultWorld.getTime());
+				Tuple<Long, Long> hmNow = ServerUtils.mcTimeToHoursMinutes(FactionVillagers.defaultWorld.getTime());
 				long totMinNow = hmNow.fst*60+hmNow.snd;
 				if (totMinNow - totMin > 10 || totMinNow - totMin < 0)
 				{
@@ -109,7 +109,7 @@ public class StatisticsBookListener implements Listener
 		
 		if (meta.getDisplayName().equalsIgnoreCase("Statistics"))
 		{
-			if (MCity.getCity(player)==null)
+			if (FactionVillagers.getCity(player)==null)
 			{
 	            player.sendMessage(Txt.parse("<bad>You must be in a faction to do this!"));
 				return;
@@ -123,7 +123,7 @@ public class StatisticsBookListener implements Listener
 //		if (!book.getTitle().equalsIgnoreCase("Statistics")) return;
 		if (!book.getDisplayName().equalsIgnoreCase("Statistics")) return;
 		
-		if (MCity.getCity(player)==null)
+		if (FactionVillagers.getCity(player)==null)
 		{
             player.sendMessage(Txt.parse("<bad>You must be in a faction to do this!"));
 			return;
@@ -143,7 +143,7 @@ public class StatisticsBookListener implements Listener
 //		{
 //			Debug.out("displayBookStatistics "+qwe);
 			
-			City city = MCity.getCity(player);
+			City city = FactionVillagers.getCity(player);
 			book.setAuthor(city.getFaction().getName());
 			
 			
@@ -152,7 +152,7 @@ public class StatisticsBookListener implements Listener
 			
 			LinkedList<String> pages = new LinkedList<String>();
 			String page1 = "";
-			page1 += "Time: "+ ServerUtils.formatMCtime(MCity.defaultWorld.getTime()) + "\n\n"; // don't change this! this is parsed when reading the book!
+			page1 += "Time: "+ ServerUtils.formatMCtime(FactionVillagers.defaultWorld.getTime()) + "\n\n"; // don't change this! this is parsed when reading the book!
 			page1 += "~                        ~\n\n";
 			page1 += "<gold><bold>Statistics<reset><black>\nDetailed statistics on the city of "+ city.getFaction().getName() +"<reset><black>\n\n";
 			page1 += "~                        ~\n\n";

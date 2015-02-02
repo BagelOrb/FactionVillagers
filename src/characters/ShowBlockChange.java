@@ -2,7 +2,7 @@ package characters;
 
 import java.util.Arrays;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ public class ShowBlockChange {
 					for (Player player : playersToShowSearchSpace)
 	        			player.sendBlockChange(b.getLocation(), b.getType(), b.getData());
 			}
-		}.runTaskLater(MCity.getCurrentPlugin(), ticks);
+		}.runTaskLater(FactionVillagers.getCurrentPlugin(), ticks);
 	}
 	public static void showAs(Location location, Material as,
 			Iterable<Player> playersToShowSearchSpace, long ticks) {

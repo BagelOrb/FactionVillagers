@@ -3,7 +3,7 @@ package commands;
 
 import java.util.List;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -12,12 +12,12 @@ import city.City;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityRecheck extends MCCommand{
+public class CmdFactionVillagersRecheck extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityRecheck()
+	public CmdFactionVillagersRecheck()
 	{
 		// Aliases
 		this.addAliases("r", "recheck");
@@ -39,7 +39,7 @@ public class CmdMCityRecheck extends MCCommand{
 	{
 		if(player.isOp())
 		{
-			for (City city : MCity.allCities)
+			for (City city : FactionVillagers.allCities)
 			{
 				NpcUtils.recheckAllNPCs();
 				List<String> errors = city.recheck();

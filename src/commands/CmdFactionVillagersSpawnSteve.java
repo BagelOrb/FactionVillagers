@@ -1,6 +1,6 @@
 package commands;
 
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 
@@ -12,12 +12,12 @@ import com.massivecraft.massivecore.util.Txt;
 
 
 
-public class CmdMCitySpawnSteve extends MCCommand{
+public class CmdFactionVillagersSpawnSteve extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCitySpawnSteve()
+	public CmdFactionVillagersSpawnSteve()
 	{
 		// Aliases
 		this.addAliases("spawnSteve", "spawn steve");
@@ -41,13 +41,13 @@ public class CmdMCitySpawnSteve extends MCCommand{
 		{
 			sendMessage("setting spawn steve!");
 			
-			if (MCity.getCurrentPlugin().spawnSteve != null)
+			if (FactionVillagers.getCurrentPlugin().spawnSteve != null)
 			{
-				MCity.getCurrentPlugin().spawnSteve.destroy();
+				FactionVillagers.getCurrentPlugin().spawnSteve.destroy();
 			}
 			
 			NPC newSteve = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Welcome");
-			MCity.getCurrentPlugin().spawnSteve = newSteve;
+			FactionVillagers.getCurrentPlugin().spawnSteve = newSteve;
 			newSteve.addTrait(SpawnSteve.class);
 			newSteve.spawn(player.getLocation());
 		}

@@ -2,7 +2,7 @@ package interaction;
 
 import java.util.Arrays;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class AnvilListener implements Listener {
 
-	public AnvilListener(MCity mCity) {
+	public AnvilListener(FactionVillagers mCity) {
 		// TODO Auto-generated constructor stub
 	}
 

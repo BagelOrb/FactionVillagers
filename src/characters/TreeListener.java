@@ -1,6 +1,6 @@
 package characters;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Material;
 import org.bukkit.TreeType;
@@ -15,7 +15,7 @@ import utils.BlockUtils;
 
 public class TreeListener implements Listener {
 
-	public TreeListener(MCity mCity) {
+	public TreeListener(FactionVillagers factionVillagers) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,7 +36,7 @@ public class TreeListener implements Listener {
 			@Override
 			public void run() {
 				
-			}}.runTaskLater(MCity.getCurrentPlugin(), 2);
+			}}.runTaskLater(FactionVillagers.getCurrentPlugin(), 2);
 		
 	}
 }

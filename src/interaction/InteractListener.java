@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -32,7 +32,7 @@ public class InteractListener implements Listener
 {
 	
 	
-	public InteractListener(MCity plugin)
+	public InteractListener(FactionVillagers plugin)
 	{
 		
 	}
@@ -114,7 +114,7 @@ public class InteractListener implements Listener
 		Block startingBlock = placedBlock.getRelative(event.getBlockFace());
 		Player player = event.getPlayer();
 		
-		City city = MCity.getCity(player);
+		City city = FactionVillagers.getCity(player);
 		if (city == null)
 		{
             player.sendMessage(Txt.parse("<bad>You must be in a faction to hire a villager!"));
@@ -131,7 +131,7 @@ public class InteractListener implements Listener
 		{
 			if (itemName.equalsIgnoreCase("Hire "+buildingType.characterType.prettyPrint()))
 				try {
-					newBuilding = buildingType.buildingClass.getConstructor(City.class, Block.class).newInstance(MCity.getCity(player), startingBlock);
+					newBuilding = buildingType.buildingClass.getConstructor(City.class, Block.class).newInstance(FactionVillagers.getCity(player), startingBlock);
 				} catch (InstantiationException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException
 						| NoSuchMethodException | SecurityException e) {

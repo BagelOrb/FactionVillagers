@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.ai.event.NavigationCancelEvent;
 import net.citizensnpcs.api.ai.event.NavigationCompleteEvent;
 import net.citizensnpcs.api.npc.NPC;
@@ -79,7 +79,7 @@ public abstract class Character extends Trait {
 		}
 	}
 
-	protected static final MCity plugin = MCity.getCurrentPlugin();
+	protected static final FactionVillagers plugin = FactionVillagers.getCurrentPlugin();
 
 	public static final int numberOfNavigationTriesBeforeStuck = plugin.getConfig().getInt("character.numberOfNavigationTriesBeforeStuck");
 	static final long cantDoActionWaitingTime = plugin.getConfig().getInt("character.cantDoActionWaitingTime");
@@ -111,7 +111,7 @@ public abstract class Character extends Trait {
 	
 	public List<HappinessEnhancement> happinessEnhancements;
 	@SuppressWarnings("unchecked")
-	public static List<HappinessIfBlockPresent> tempHappinessFromResouce = (List<HappinessIfBlockPresent>) MCity.getCurrentPlugin().getConfig().getList("happiness.tempHappinessFromResouce");
+	public static List<HappinessIfBlockPresent> tempHappinessFromResouce = (List<HappinessIfBlockPresent>) FactionVillagers.getCurrentPlugin().getConfig().getList("happiness.tempHappinessFromResouce");
 	private double noFoodUnhappinessModifier = plugin.getConfig().getDouble("happiness.noFoodUnhappinessModifier");
 
 	@SuppressWarnings("unchecked")
@@ -119,8 +119,8 @@ public abstract class Character extends Trait {
 		super(name);
 		
 		try {
-			happinessEnhancements = (List<HappinessEnhancement>) MCity.getCurrentPlugin().getConfig().getList(getConfigYmlPath()+".happinessEnhancements");
-			happinessEnhancements.addAll((List<HappinessEnhancement>) MCity.getCurrentPlugin().getConfig().getList("happiness.commonHappinessEnhancements"));
+			happinessEnhancements = (List<HappinessEnhancement>) FactionVillagers.getCurrentPlugin().getConfig().getList(getConfigYmlPath()+".happinessEnhancements");
+			happinessEnhancements.addAll((List<HappinessEnhancement>) FactionVillagers.getCurrentPlugin().getConfig().getList("happiness.commonHappinessEnhancements"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -215,7 +215,7 @@ public abstract class Character extends Trait {
 		if (homeBuilding==null) 
 		{
 			Debug.out("all cities, all buildings: ");
-			for (City city : MCity.allCities)
+			for (City city : FactionVillagers.allCities)
 			{
 				Debug.out("City "+city.getFaction().getName());
 				for (Building building : city.getAllBuildings())
@@ -229,7 +229,7 @@ public abstract class Character extends Trait {
 				public void run() {
 				thisTrait.getNPC().destroy();
 					
-				}}.runTaskLater(MCity.getCurrentPlugin(), 1);
+				}}.runTaskLater(FactionVillagers.getCurrentPlugin(), 1);
 			return;
 		}
 		
@@ -272,7 +272,7 @@ public abstract class Character extends Trait {
 			@Override
 			public void run() {
 				goTo(loc);
-			}}.runTaskLater(MCity.getCurrentPlugin(), delay);
+			}}.runTaskLater(FactionVillagers.getCurrentPlugin(), delay);
 //		else
 //			Debug.out("WARNING: Can't set next target location of despawned NPC!");
 	}

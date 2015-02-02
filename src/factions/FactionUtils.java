@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -45,7 +45,7 @@ public class FactionUtils {
 	}
 	
 	public static  boolean playerIsOnHisFacTerrain(Player player, Block block) {
-		boolean noCity = MCity.getCity(player) == null;
+		boolean noCity = FactionVillagers.getCity(player) == null;
 		if (noCity) {
 			player.sendMessage("noCity="+noCity);
 			player.sendMessage("factionToCity keys :"+Arrays.toString(factionIDToCity.keySet().toArray()));
@@ -53,7 +53,7 @@ public class FactionUtils {
 		}
 		if (noCity) return false;
 		
-		boolean notOnOwnLand = !MCity.getCity(player).getFaction().equals(getFactionAt(block.getLocation()) );
+		boolean notOnOwnLand = !FactionVillagers.getCity(player).getFaction().equals(getFactionAt(block.getLocation()) );
 		if (notOnOwnLand) player.sendMessage("notOnOwnLand="+notOnOwnLand);
 		
 		return !noCity && !notOnOwnLand;

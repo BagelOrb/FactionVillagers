@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 
@@ -26,7 +26,7 @@ import factions.FactionUtils;
 
 public class NPCListener implements Listener {
 
-	public NPCListener(MCity mCity) {
+	public NPCListener(FactionVillagers mCity) {
 		// TODO Auto-generated constructor stub
 	}
 

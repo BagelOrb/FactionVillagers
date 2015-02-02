@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -58,7 +58,7 @@ public class MatUtils {
 		try {
 			
 			
-			FileConfiguration config = MCity.getCurrentPlugin().getConfig();
+			FileConfiguration config = FactionVillagers.getCurrentPlugin().getConfig();
 			
 			HashSet<Material> mats = new HashSet<Material>();
 			for (CharacterType ch : CharacterType.values())

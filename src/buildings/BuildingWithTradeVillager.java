@@ -8,7 +8,7 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 
@@ -196,7 +196,7 @@ public abstract class BuildingWithTradeVillager extends ChestBuilding {
 //			
 //			@Override
 //			public void run() {
-				for(Entity e: MCity.getCurrentPlugin().getServer().getWorld("world").getEntities())
+				for(Entity e: FactionVillagers.getCurrentPlugin().getServer().getWorld("world").getEntities())
 				{
 					if(e.getUniqueId().equals(villagerId))
 					{
@@ -207,7 +207,7 @@ public abstract class BuildingWithTradeVillager extends ChestBuilding {
 				}
 				
 //			}
-//		}.runTaskLater(MCity.getCurrentPlugin(), 40);
+//		}.runTaskLater(FactionVillagers.getCurrentPlugin(), 40);
 	}
 
 }

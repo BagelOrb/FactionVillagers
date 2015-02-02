@@ -16,7 +16,7 @@ import javax.json.JsonObjectBuilder;
 
 import main.Debug;
 import main.Debug.Debuggable;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -40,7 +40,7 @@ import com.massivecraft.massivecore.util.Txt;
 
 public abstract class Building implements JsonAble<Building> , Debuggable{
 	static final String configYmlPath_building = "building";
-	static final FileConfiguration configYml = MCity.getCurrentPlugin().getConfig();
+	static final FileConfiguration configYml = FactionVillagers.getCurrentPlugin().getConfig();
 	static final String activeString = "Active";
 	static final String joblessString = "UNEMPLOYED";
 	static final String inactiveString = "INACTIVE";
@@ -378,7 +378,7 @@ public abstract class Building implements JsonAble<Building> , Debuggable{
 		hasRequirements = o.getBoolean("hasRequirements");
 		buildingId = o.getInt("buildingId");
 		startingBlock = JsonBlock.fromJsonObject(o.getJsonObject("startingBlock"));
-		lastFoodTime = o.getInt("lastFoodTime", (int) MCity.defaultWorld.getFullTime());
+		lastFoodTime = o.getInt("lastFoodTime", (int) FactionVillagers.defaultWorld.getFullTime());
 
 		checkValidityOfBuildingPlace(false);
 	}

@@ -1,27 +1,25 @@
 package commands;
 
-import main.MCity;
 
-import org.bukkit.ChatColor;
-
+import com.massivecraft.massivecore.cmd.arg.ARInteger;
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityReload extends MCCommand{
+public class CmdFactionVillagersPROTOTYPE extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityReload()
+	public CmdFactionVillagersPROTOTYPE()
 	{
 		// Aliases
-		this.addAliases("rel", "reload");
-
-		this.setDesc("reload the config of the plugin");
-		this.setHelp("This command reloads the config");
+		this.addAliases("s", "sub");
 
 		// Args
-//		this.addOptionalArg("page", "1");
-
+		this.addOptionalArg("integerArg", "1");
+		
+		this.setDesc("do a subcommand");
+		this.setHelp("This command is used to try out commands");
+		
 		// Requirements
 //		this.addRequirements(ReqFactionsEnabled.get());
 //		this.addRequirements(ReqHasPerm.get(Perm.LIST.node));
@@ -34,10 +32,14 @@ public class CmdMCityReload extends MCCommand{
 	@Override
 	public void perform()
 	{
-		if(player.isOp())
+		if(player.isOp())	
 		{
-			MCity.getCurrentPlugin().reloadMyConfig();
-			sendMessage(ChatColor.GREEN + "Reloaded!");
+			int defaultInt = 1;
+			int index = 0;
+			Integer integerArg = this.arg(index, ARInteger.get(), defaultInt);
+			if (integerArg == null) return;
+	
+			sendMessage("performing SubCommand!");
 		}
 		else
 		{

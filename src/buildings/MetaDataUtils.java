@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Entity;
@@ -51,7 +51,7 @@ public class MetaDataUtils {
 	
 	private static void setBelongingToMetadata(Metadatable entity, String var, String ids) {
 		removeAllBelongingTo(entity);
-		entity.setMetadata(var, new FixedMetadataValue(MCity.getCurrentPlugin(), ids));
+		entity.setMetadata(var, new FixedMetadataValue(FactionVillagers.getCurrentPlugin(), ids));
 	}
 
 
@@ -94,7 +94,7 @@ public class MetaDataUtils {
 	}
 	
 	public static void removeAllBelongingTo(Metadatable entity) {
-		entity.removeMetadata(belongsToBuildingString, MCity.getCurrentPlugin());
+		entity.removeMetadata(belongsToBuildingString, FactionVillagers.getCurrentPlugin());
 	}
 	public static boolean belongsToBuilding(Metadatable entity) {
 		return entity.hasMetadata(belongsToBuildingString);
@@ -156,7 +156,7 @@ public class MetaDataUtils {
 	
 	private static void setMetadata(Entity entity, String var, String ids) {
 		removeAllBelongingTo(entity);
-		entity.setMetadata(var, new FixedMetadataValue(MCity.getCurrentPlugin(), ids));
+		entity.setMetadata(var, new FixedMetadataValue(FactionVillagers.getCurrentPlugin(), ids));
 	}
 
 
@@ -196,7 +196,7 @@ public class MetaDataUtils {
 	}
 	
 	public static void removeAllBelongingTo(Entity entity) {
-		entity.removeMetadata(belongsToBuildingString, MCity.getCurrentPlugin());
+		entity.removeMetadata(belongsToBuildingString, FactionVillagers.getCurrentPlugin());
 	}
 	public static boolean belongsToBuilding(Entity entity) {
 		return entity.hasMetadata(belongsToBuildingString);
@@ -234,9 +234,9 @@ public class MetaDataUtils {
 //
 //	public static void setFake(Block block, boolean fake) {
 //		if (fake)
-//			block.setMetadata(isFake, new FixedMetadataValue(MCity.getCurrentPlugin(), true));
+//			block.setMetadata(isFake, new FixedMetadataValue(FactionVillagers.getCurrentPlugin(), true));
 //		else
-//			block.removeMetadata(isFake, MCity.getCurrentPlugin());
+//			block.removeMetadata(isFake, FactionVillagers.getCurrentPlugin());
 //	}
 //	
 //	public static boolean isFake(Block block) {

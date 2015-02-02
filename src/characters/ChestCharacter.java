@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.event.NPCDeathEvent;
 import net.citizensnpcs.api.trait.trait.Inventory;
 import net.citizensnpcs.api.util.DataKey;
@@ -161,7 +161,7 @@ public abstract class ChestCharacter extends Character {
 		super.construct(building, homeLocation);
 		
 		/*
-		FileConfiguration conf = MCity.getCurrentPlugin().getConfig();
+		FileConfiguration conf = FactionVillagers.getCurrentPlugin().getConfig();
 //		conf.set(getConfigYmlPath()+".production", new Tuple<ItemStack[], ItemStack[]>(production.getItemsNeededToConsume(), itemsProduced));
 		Production prod = new Production(production.getItemsNeededToConsume(), production.getItemsProduced());
 		List<Production> prods = new LinkedList<Production>();
@@ -246,7 +246,7 @@ public abstract class ChestCharacter extends Character {
 				
 				goTo(currentAction.getLocation());
 			}
-		}.runTaskLater(MCity.getCurrentPlugin(), random.nextInt(180)+20);
+		}.runTaskLater(FactionVillagers.getCurrentPlugin(), random.nextInt(180)+20);
 
 	}
 	
@@ -753,7 +753,7 @@ public abstract class ChestCharacter extends Character {
 
 //	public void waitTicks(long ticks) {
 //		final Boxed<Boolean> done = new Boxed<Boolean>(false);
-//		Bukkit.getScheduler().runTaskLater(MCity.getCurrentPlugin(), new Runnable(){
+//		Bukkit.getScheduler().runTaskLater(FactionVillagers.getCurrentPlugin(), new Runnable(){
 //			@Override
 //			public void run() {
 //				done.t = true;

@@ -1,7 +1,7 @@
 package commands;
 
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.entity.Player;
 
@@ -9,7 +9,7 @@ import city.City;
 
 import com.massivecraft.massivecore.cmd.MassiveCommand;
 
-public abstract class MCCommand extends MassiveCommand
+public abstract class FVCommand extends MassiveCommand
 {
 	// -------------------------------------------- //
 	// FIELDS
@@ -30,7 +30,7 @@ public abstract class MCCommand extends MassiveCommand
 		if (sender instanceof Player)
 		{
 			player = (Player) sender;
-			this.playerCity = MCity.getCity(player);
+			this.playerCity = FactionVillagers.getCity(player);
 		}
 		
 		// Check disabled

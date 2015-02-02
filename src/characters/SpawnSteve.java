@@ -1,7 +1,7 @@
 package characters;
 
 
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.ai.speech.SpeechContext;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
 import net.citizensnpcs.api.npc.NPC;
@@ -20,7 +20,7 @@ public class SpawnSteve extends Trait {
 		super("spawnSteve");
 	}
 	
-	protected static final MCity plugin = MCity.getCurrentPlugin();
+	protected static final FactionVillagers plugin = FactionVillagers.getCurrentPlugin();
 	
 	@Override
 	public void onSpawn() {
@@ -41,9 +41,12 @@ public class SpawnSteve extends Trait {
 		if(npc.getEntity() != null)
 		{
 			final Player player = e.getPlayer();
-			if(player.getLocation().distanceSquared(npc.getEntity().getLocation()) < 32)
+			if(player.getWorld() == npc.getEntity().getWorld())
 			{
-				npc.faceLocation(player.getLocation());
+				if(player.getLocation().distanceSquared(npc.getEntity().getLocation()) < 32)
+				{
+					npc.faceLocation(player.getLocation());
+				}
 			}
 		}
 	}
@@ -52,11 +55,11 @@ public class SpawnSteve extends Trait {
 		NPC npc = e.getNPC();
 //		SpawnSteve steve = npc.getTrait(SpawnSteve.class);
 		
-		if (MCity.getCurrentPlugin().spawnSteve == null)
-			MCity.getCurrentPlugin().spawnSteve = npc;
+		if (FactionVillagers.getCurrentPlugin().spawnSteve == null)
+			FactionVillagers.getCurrentPlugin().spawnSteve = npc;
 			
 			
-		if (!MCity.getCurrentPlugin().spawnSteve.equals(npc))
+		if (!FactionVillagers.getCurrentPlugin().spawnSteve.equals(npc))
 			npc.destroy();
 		else 
 		{

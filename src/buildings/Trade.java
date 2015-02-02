@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Material;
@@ -28,7 +28,7 @@ public class Trade {
 		this.sell = sell; this.buy = buy; this.buyB = null;
 	}
 	
-	protected static final MCity plugin = MCity.getCurrentPlugin();
+	protected static final FactionVillagers plugin = FactionVillagers.getCurrentPlugin();
 	
 	public static Collection<Trade> getHireRecipes(boolean showDebugTrades) {
 		Collection<Trade> recipes = new LinkedList<Trade>();

@@ -5,12 +5,12 @@ import characters.NpcUtils;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityProduction extends MCCommand{
+public class CmdFactionVillagersProduction extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityProduction()
+	public CmdFactionVillagersProduction()
 	{
 		// Aliases
 		this.addAliases("o", "p", "production", "productions");

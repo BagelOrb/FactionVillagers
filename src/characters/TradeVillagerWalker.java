@@ -1,7 +1,7 @@
 package characters;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 import net.citizensnpcs.api.util.DataKey;
 
 import org.bukkit.Location;
@@ -130,7 +130,7 @@ public class TradeVillagerWalker extends Character {
 		if (homeBuilding==null) 
 		{
 			Debug.out("all cities, all buildings: ");
-			for (City city : MCity.allCities)
+			for (City city : FactionVillagers.allCities)
 			{
 				Debug.out("City "+city.getFaction().getName());
 				for (Building building : city.getAllBuildings())
@@ -144,7 +144,7 @@ public class TradeVillagerWalker extends Character {
 				public void run() {
 				thisTrait.getNPC().destroy();
 					
-				}}.runTaskLater(MCity.getCurrentPlugin(), 1);
+				}}.runTaskLater(FactionVillagers.getCurrentPlugin(), 1);
 			return;
 		}
 		

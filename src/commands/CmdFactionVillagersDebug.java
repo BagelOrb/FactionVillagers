@@ -3,18 +3,18 @@ package commands;
 import java.util.Arrays;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import com.massivecraft.massivecore.util.Txt;
 
 
 
-public class CmdMCityDebug extends MCCommand{
+public class CmdFactionVillagersDebug extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityDebug()
+	public CmdFactionVillagersDebug()
 	{
 		// Aliases
 		this.addAliases("d", "debug");
@@ -52,7 +52,7 @@ public class CmdMCityDebug extends MCCommand{
 	//		LinkedList<ItemStack> q = new LinkedList<ItemStack>(Arrays.asList(new ItemStack[]{new ItemStack(Material.ACACIA_STAIRS, 4), new ItemStack(Material.APPLE, 2)}));
 	//		LinkedList<Material> w = new LinkedList<Material>(Arrays.asList(new Material[]{Material.ACACIA_STAIRS, Material.APPLE}));
 	//		
-	//		FileConfiguration conf = MCity.getCurrentPlugin().getConfig();
+	//		FileConfiguration conf = FactionVillagers.getCurrentPlugin().getConfig();
 	//		conf.set("randomBullshit", w);
 	//		conf.set("randomBullshit2", q);
 	//		conf.set("randomBullshit3", new LinkedList<ItemStack>());
@@ -63,14 +63,14 @@ public class CmdMCityDebug extends MCCommand{
 	//			e.printStackTrace();
 	//		}
 	//		
-	//		MCity.getCurrentPlugin().saveConfig();
+	//		FactionVillagers.getCurrentPlugin().saveConfig();
 			
 			
 	//		if (this.arg(0) != null)
 	//			sendMessage(Txt.parse(this.arg(0)));
 			
 	//		playerCity.statistics.statistics = new CityStatistics.Statistics(playerCity.statistics);
-	//		playerCity.statistics.statistics.computeNetto((24000-MCity.defaultWorld.getTime())/1000.);
+	//		playerCity.statistics.statistics.computeNetto((24000-FactionVillagers.defaultWorld.getTime())/1000.);
 	//		sendMessage(Txt.parse(""+playerCity.statistics.statistics));
 		
 			
@@ -134,8 +134,8 @@ public class CmdMCityDebug extends MCCommand{
 	//			p.getWorld().spawn(p, Villager.class);
 	//		}
 			
-			Debug.out("total consumption = "+Arrays.toString(MCity.getCity(player).getTotalConsumption()));
-			sendMessage("total consumption = "+Arrays.toString(MCity.getCity(player).getTotalConsumption()));
+			Debug.out("total consumption = "+Arrays.toString(FactionVillagers.getCity(player).getTotalConsumption()));
+			sendMessage("total consumption = "+Arrays.toString(FactionVillagers.getCity(player).getTotalConsumption()));
 		}
 		else
 		{

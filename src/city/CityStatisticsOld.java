@@ -107,7 +107,7 @@ public class CityStatisticsOld implements JsonAble<CityStatisticsOld>{
 		}
 
 		public void compute() {
-			computeNettoPerBuilding(1);  // (24000-MCity.defaultWorld.getTime())/1000.);
+			computeNettoPerBuilding(1);  // (24000-FactionVillagers.defaultWorld.getTime())/1000.);
 //			computeNettoPerBuildingLastDay(1);
 			computeNetto(1);
 			computeNettoLastDay(1);

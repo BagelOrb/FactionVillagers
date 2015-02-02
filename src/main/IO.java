@@ -35,7 +35,7 @@ import com.massivecraft.massivecore.util.Txt;
 
 public class IO {
 
-	public static File baseSaveLocation = new File("plugins\\MCity\\saves\\");
+	public static File baseSaveLocation = new File("plugins\\FactionVillagers\\saves\\");
 	private static String pluginJsonFileString = "plugin.json";
 	private static File pluginJsonFile = new File(baseSaveLocation+"\\"+pluginJsonFileString );
 
@@ -50,7 +50,7 @@ public class IO {
 			
 	        Debug.out(Txt.parse("<i>Saving Plugin..."));
 	        baseSaveLocation.mkdir();
-			JsonUtils.writeToFile(MCity.getCurrentPlugin().toJsonObjectBuilder(), pluginJsonFile );
+			JsonUtils.writeToFile(FactionVillagers.getCurrentPlugin().toJsonObjectBuilder(), pluginJsonFile );
 	        Debug.out(Txt.parse("<good>Saving complete!"));
 		} catch (IOException e) {
 	        Debug.out(Txt.parse("<bad>Saving Problem!!!!!!"));
@@ -60,23 +60,23 @@ public class IO {
 	
 	
 
-	public static JsonObjectBuilder toJsonObjectBuilder(MCity mCity) {
+	public static JsonObjectBuilder toJsonObjectBuilder(FactionVillagers factionVillagers) {
 		JsonObjectBuilder ret = Json.createObjectBuilder();
-		if (mCity.spawnSteve != null)
-			ret.add("steveNpcId", mCity.spawnSteve.getId());
+		if (factionVillagers.spawnSteve != null)
+			ret.add("steveNpcId", factionVillagers.spawnSteve.getId());
 		return ret;
 	}
 
 
 
-	public static void loadPlugin(MCity mCity) {
+	public static void loadPlugin(FactionVillagers factionVillagers) {
 	    Debug.out(Txt.parse("<i>Loading Plugin..."));
 	    
 	    baseSaveLocation.mkdir();
 	    try {
 			JsonReader reader = Json.createReader(new FileInputStream(pluginJsonFile));
 			JsonObject o = reader.readObject();
-			pluginFromJsonObject(mCity, o);
+			pluginFromJsonObject(factionVillagers, o);
 			Debug.out(Txt.parse("<good>Loading complete!"));
 		} catch (FileNotFoundException e) {
 			Debug.out(Txt.parse("<good>Loading plugin problem!"));
@@ -86,7 +86,7 @@ public class IO {
 	}
 
 
-	public static void pluginFromJsonObject(final MCity mCity, JsonObject o) {
+	public static void pluginFromJsonObject(final FactionVillagers factionVillagers, JsonObject o) {
 		final int npcId = o.getInt("steveNpcId", -1);
 		if (npcId == -1)
 			Debug.warn("Spawn Steve NPC not found!");
@@ -97,13 +97,13 @@ public class IO {
 				@Override
 				public void run() {
 //					try {
-						mCity.spawnSteve = CitizensAPI.getNPCRegistry().getById(npcId);
+						factionVillagers.spawnSteve = CitizensAPI.getNPCRegistry().getById(npcId);
 //					} catch (IllegalArgumentException e) {
 //						e.printStackTrace();
 //					}
 					
 				}
-			}.runTaskLater(mCity, 20);
+			}.runTaskLater(factionVillagers, 20);
 		}
 	}
 	
@@ -118,7 +118,7 @@ public class IO {
 			
 	        Debug.out(Txt.parse("<i>Saving Cities..."));
 	        baseSaveLocation.mkdir();
-			for (City city : MCity.allCities)
+			for (City city : FactionVillagers.allCities)
 				JsonUtils.writeToFile(city.toJsonObjectBuilder(), new File(baseSaveLocation+"\\"+city.factionID+".json"));
 	        Debug.out(Txt.parse("<good>Saving complete!"));
 	        Debug.out(Txt.parse("<i>Creating Backup of City files..."));
@@ -156,7 +156,7 @@ public class IO {
 					continue;
 				}
 				City city = JsonUtils.readFromFile(file, City.class);
-				MCity.allCities.add(city);
+				FactionVillagers.allCities.add(city);
 				
 				Debug.out(Txt.parse("<good>Loaded City "+city.getFaction().getName()));
 			}
@@ -196,7 +196,7 @@ public class IO {
 				{
 					allOK = false;
 	                Debug.warn(Txt.parse("<bad>Found faction without city!! creating city "+fac.getName()+"..."));
-					city = new City(MCity.defaultWorld, fac.getId());
+					city = new City(FactionVillagers.defaultWorld, fac.getId());
 					city.create();
 	                Debug.out(Txt.parse("<i>\t(Recovering buildings not implemented...)"));
 				}

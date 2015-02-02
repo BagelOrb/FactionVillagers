@@ -1,6 +1,6 @@
-name: MCity
-main: main.MCity
-description: MCity Minecraft Plugin
+name: FactionVillagers
+main: main.FactionVillagers
+description: FactionVillagers Minecraft Plugin
 version: 0.9
 author: JB & TK
 depend:

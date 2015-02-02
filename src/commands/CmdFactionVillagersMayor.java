@@ -1,25 +1,28 @@
 package commands;
 
+import org.bukkit.inventory.ItemStack;
 
-import com.massivecraft.massivecore.cmd.arg.ARInteger;
+import buildings.Trade;
+import characters.CharacterType;
+
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityPROTOTYPE extends MCCommand{
+public class CmdFactionVillagersMayor extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityPROTOTYPE()
+	public CmdFactionVillagersMayor()
 	{
 		// Aliases
-		this.addAliases("s", "sub");
+		this.addAliases("m", "mayor", "paper");
+
+		this.setDesc("get a paper to hire a Mayor");
+		this.setHelp("This command gives you a paper to hire a Mayor");
 
 		// Args
-		this.addOptionalArg("integerArg", "1");
-		
-		this.setDesc("do a subcommand");
-		this.setHelp("This command is used to try out commands");
-		
+//		this.addOptionalArg("page", "1");
+
 		// Requirements
 //		this.addRequirements(ReqFactionsEnabled.get());
 //		this.addRequirements(ReqHasPerm.get(Perm.LIST.node));
@@ -32,14 +35,11 @@ public class CmdMCityPROTOTYPE extends MCCommand{
 	@Override
 	public void perform()
 	{
-		if(player.isOp())	
+		if(player.isOp())
 		{
-			int defaultInt = 1;
-			int index = 0;
-			Integer integerArg = this.arg(index, ARInteger.get(), defaultInt);
-			if (integerArg == null) return;
-	
-			sendMessage("performing SubCommand!");
+			ItemStack hirePaper = Trade.getHirePaperFor(CharacterType.MAYOR);
+			player.getInventory().addItem(hirePaper);
+			sendMessage(Txt.parse("<good>Mayor paper given!"));
 		}
 		else
 		{

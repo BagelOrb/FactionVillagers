@@ -3,12 +3,12 @@ package commands;
 import characters.NpcUtils;
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityShow extends MCCommand{
+public class CmdFactionVillagersShow extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityShow()
+	public CmdFactionVillagersShow()
 	{
 		// Aliases
 		this.addAliases("s", "show");

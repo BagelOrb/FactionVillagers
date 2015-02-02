@@ -2,12 +2,12 @@ package commands;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityUnemployed extends MCCommand{
+public class CmdFactionVillagersUnemployed extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityUnemployed()
+	public CmdFactionVillagersUnemployed()
 	{
 		// Aliases
 		this.addAliases("getu", "gu", "unemployed");

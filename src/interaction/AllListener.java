@@ -1,7 +1,7 @@
 package interaction;
 
 import main.Debug;
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -137,7 +137,7 @@ import org.bukkit.event.world.WorldUnloadEvent;
 //AsyncPlayerPreLoginEvent, BlockEvent, EntityEvent, HangingEvent, InventoryEvent, InventoryMoveItemEvent, InventoryPickupItemEvent, PaintingEvent, PlayerEvent, PlayerLeashEntityEvent, PlayerPreLoginEvent, ServerEvent, VehicleEvent, WeatherEvent, WorldEvent
 @SuppressWarnings("deprecation")
 public class AllListener implements Listener {
-	public AllListener(MCity mCity) {
+	public AllListener(FactionVillagers mCity) {
 		// TODO Auto-generated constructor stub
 	}
 

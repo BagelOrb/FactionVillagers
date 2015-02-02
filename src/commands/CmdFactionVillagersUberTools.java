@@ -12,12 +12,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityUberTools extends MCCommand{
+public class CmdFactionVillagersUberTools extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityUberTools()
+	public CmdFactionVillagersUberTools()
 	{
 		// Aliases
 		this.addAliases("u", "ubertools");

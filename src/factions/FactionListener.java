@@ -2,7 +2,7 @@ package factions;
 
 import java.util.Map;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +25,7 @@ import com.massivecraft.massivecore.util.Txt;
 
 public class FactionListener implements Listener {
 
-	public FactionListener(MCity mCity) {
+	public FactionListener(FactionVillagers factionVillagers) {
 		// TODO Auto-generated constructor stub
 	}
 

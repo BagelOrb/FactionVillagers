@@ -1,6 +1,6 @@
 package factions;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Chunk;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,7 @@ import com.massivecraft.factions.entity.Faction;
 
 public class ChunkListener implements Listener {
 	
-	public ChunkListener(MCity mCity) {
+	public ChunkListener(FactionVillagers factionVillagers) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,7 +20,7 @@ public class ChunkListener implements Listener {
 	public void onChunkUnload(ChunkUnloadEvent e) 
 	{
 		//Debug.out("ChunkUnloadEvent called!");
-		if(MCity.keepFactionChunksLoaded)
+		if(FactionVillagers.keepFactionChunksLoaded)
 		{
 			Chunk chunk = e.getChunk();
 			Faction faction = FactionUtils.getFactionAt(chunk);

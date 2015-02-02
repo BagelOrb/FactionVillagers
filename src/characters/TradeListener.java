@@ -1,6 +1,6 @@
 package characters;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -14,7 +14,7 @@ import buildings.MetaDataUtils;
 
 public class TradeListener implements Listener {
 
-	public TradeListener(MCity mCity) {
+	public TradeListener(FactionVillagers factionVillagers) {
 		// TODO Auto-generated constructor stub
 	}
 

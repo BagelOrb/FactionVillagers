@@ -1,16 +1,16 @@
 package commands;
 
 
-public class CmdMCityNpc extends MCCommand{
+public class CmdFactionVillagersNpc extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-//	CmdMCityNpcGo go = new CmdMCityNpcGo();
-	CmdMCityNpcCome come = new CmdMCityNpcCome();
-	CmdMCityNpcFollow follow = new CmdMCityNpcFollow();
+//	CmdFactionVillagersNpcGo go = new CmdFactionVillagersNpcGo();
+	CmdFactionVillagersNpcCome come = new CmdFactionVillagersNpcCome();
+	CmdFactionVillagersNpcFollow follow = new CmdFactionVillagersNpcFollow();
 	
-	public CmdMCityNpc()
+	public CmdFactionVillagersNpc()
 	{
 		// Aliases
 		this.addAliases("n", "npc");

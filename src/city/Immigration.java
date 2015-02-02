@@ -3,7 +3,7 @@ package city;
 import java.util.List;
 import java.util.Random;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -17,7 +17,7 @@ import factions.FactionUtils;
 
 public class Immigration {
 
-	final static MCity plugin = MCity.getCurrentPlugin();
+	final static FactionVillagers plugin = FactionVillagers.getCurrentPlugin();
 	
 	private static final double lowerFoodMargin = plugin.getConfig().getDouble("immigration.lowerFoodMargin");
 	private static final double upperFoodMargin = plugin.getConfig().getDouble("immigration.upperFoodMargin");

@@ -12,12 +12,12 @@ import characters.NpcUtils;
 
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityNpcCome extends MCCommand{
+public class CmdFactionVillagersNpcCome extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityNpcCome()
+	public CmdFactionVillagersNpcCome()
 	{
 		// Aliases
 		this.addAliases("c", "come");

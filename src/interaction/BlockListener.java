@@ -2,7 +2,7 @@ package interaction;
 
 import java.util.List;
 
-import main.MCity;
+import main.FactionVillagers;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -22,7 +22,7 @@ import com.massivecraft.massivecore.util.Txt;
 public class BlockListener implements Listener
 {
 
-	public BlockListener(MCity plugin)
+	public BlockListener(FactionVillagers plugin)
 	{
 		
 	}
@@ -109,7 +109,7 @@ public class BlockListener implements Listener
 //			blockAbove.setType(Material.AIR);
 //		}
 		
-		if (MCity.getCity(player)==null) return;
+		if (FactionVillagers.getCity(player)==null) return;
 		
 		// TODO : check if Factions plugin checks whether it should stop the BlockBreakEvent before this function is called!
 		{

@@ -2,27 +2,26 @@ package commands;
 
 import org.bukkit.inventory.ItemStack;
 
-import buildings.Trade;
-import characters.CharacterType;
-
 import com.massivecraft.massivecore.util.Txt;
 
-public class CmdMCityMayor extends MCCommand{
+
+
+public class CmdFactionVillagersFullStack extends FVCommand{
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
-	public CmdMCityMayor()
+	public CmdFactionVillagersFullStack()
 	{
 		// Aliases
-		this.addAliases("m", "mayor", "paper");
-
-		this.setDesc("get a paper to hire a Mayor");
-		this.setHelp("This command gives you a paper to hire a Mayor");
+		this.addAliases("f", "fullstack");
 
 		// Args
-//		this.addOptionalArg("page", "1");
-
+		this.addOptionalArg("optionalArg", "");
+		
+		this.setDesc("make item in hand a stack of 64");
+		this.setHelp("for OPs only");
+		
 		// Requirements
 //		this.addRequirements(ReqFactionsEnabled.get());
 //		this.addRequirements(ReqHasPerm.get(Perm.LIST.node));
@@ -37,9 +36,9 @@ public class CmdMCityMayor extends MCCommand{
 	{
 		if(player.isOp())
 		{
-			ItemStack hirePaper = Trade.getHirePaperFor(CharacterType.MAYOR);
-			player.getInventory().addItem(hirePaper);
-			sendMessage(Txt.parse("<good>Mayor paper given!"));
+			ItemStack item = player.getItemInHand();
+			item.setAmount(64);
+			player.setItemInHand(item);
 		}
 		else
 		{
