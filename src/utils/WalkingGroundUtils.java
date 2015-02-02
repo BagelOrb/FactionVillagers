@@ -42,8 +42,6 @@ public class WalkingGroundUtils {
 			if (BlockUtils.isFenceType(block.getRelative(BlockFace.DOWN).getType()))
 				return false;
 			switch (block.getType()) {
-	//		case WOODEN_DOOR:
-	//			return true;
 			case WATER:
 			case LAVA:
 			case STATIONARY_LAVA:

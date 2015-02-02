@@ -107,7 +107,7 @@ public class BlockUtils {
 		final List<Material> leaveTypes = Arrays.asList(Material.LEAVES, Material.LEAVES_2);
 		return leaveTypes.contains(m); }
 	public static boolean isGateType(Material m) { 
-		final List<Material> gates = Arrays.asList(new Material[]{Material.FENCE_GATE,  Material.WOODEN_DOOR,  Material.SPRUCE_DOOR, Material.ACACIA_DOOR, Material.JUNGLE_DOOR, Material.DARK_OAK_DOOR, Material.BIRCH_DOOR, Material.TRAP_DOOR});
+		final List<Material> gates = Arrays.asList(new Material[]{Material.FENCE_GATE, Material.BIRCH_FENCE_GATE, Material.SPRUCE_FENCE_GATE, Material.DARK_OAK_FENCE_GATE, Material.ACACIA_FENCE_GATE, Material.JUNGLE_FENCE_GATE, Material.WOODEN_DOOR,  Material.SPRUCE_DOOR, Material.ACACIA_DOOR, Material.JUNGLE_DOOR, Material.DARK_OAK_DOOR, Material.BIRCH_DOOR, Material.TRAP_DOOR});
 		return gates.contains(m); }
 	public static boolean isFenceType(Material m) { 
 		final List<Material> fenceTypes = Arrays.asList(new Material[]{Material.FENCE,  Material.COBBLE_WALL, Material.NETHER_FENCE}); // not Material.FENCE_GATE !!! you can walk thugh gates...
