@@ -1,0 +1,205 @@
+--------+---------------------------------------------------------
+N A M E :
+--------+
+
+- Minecraft Delegation
+
+- BoroughCraft
+
+- Minecraft Urbanization
+
+- Faction Citizens
+
+
+--------------+---------------------------------------------------------
+B I G  things :
+--------------+
+
+BUGS
+
+ - miner pakte 32 carpet ni goed?
+ - register consumption gaat ni goed bij miner
+ - consumption gaat ni goed bij miner
+ - miner legt mossy stone neer?
+ - item amount naar 0 setten gaat nie goed ofzo, er blijven stacks van 1 liggen
+
+
+----------------------------------------
+HAPPINESS
+
+V unhappiness from amount of employed villagers (exponential?)
+V unhappiness from hunger
+
+V happiness from special items in room (similar to buildingrequirements)
+V happiness from special resources (chicken, ...)
+V happiness from amount of unemployed villagers
+
+=> 
+
+V happiness modifies waiting times of villagers
+V		=> also walking speed
+- influences how fast new immigrants come (?)
+- (gives extra faction power)
+
+
+----------------------------------------
+
+ - Fix metadata! load/save! ( use my own map instead? )
+
+ - Trade villager becomes invalid if his chunk gets unloaded, disappears when u trade with him and only respawn if u recheck.. he needs to repsawn when u load chunk or something..
+
+ - Fix villagers buggens als chunks niet loaded zijn ofzo
+
+- unemployeds wait a bit longer before getting food
+ => check waiting mechanisms: timings when everyone gets food
+
+- no villager spawning when town hall inactive !! what should happen when townhall inactive??
+
+- only stairs down and up when checking paths
+
+- Villager paper lore adden: productions
+
+- tweek consumption & production
+
+- make inventories able to use durability > ink sacks = durability of bone meal... (?)
+- check ALL TODO's
+
+- implement possibility to give tools to citizens (but how?)
+
+------------------+---------------------------------------------------------
+s m a l l  things :
+------------------+
+
+
+- happiness overview in Statistics Book
+- number of unemployeds in book as well
+
+- Make starting tools wooden
+
+- Fix abuse hole: als een job langer duurt dan sleepWaitingTime, skipt ie slaap en ontbijt!
+
+- give MAX_AIRSPACE variable to each building (instead of only the BuildingRequirement)
+  so that the airspace checker can already stop when airspace is biggar than that max, instead of the 8000!
+
+- BUGGY shit: when server crashes, metadata might revert to older state while cities are stored in json
+	==> recheck metadata! (or recheck buildings?)
+
+- remove bug of getting stuck when door to warehouse is next to chest! (?)
+
+- recheck metadata of blocks when it matters (for example when it would stop mining)
+- remove belongingTo metadata when improper!
+
+- send message when buildings become active (just like when they become inactive)
+
+- flowing water problem
+  let water destroy rails/carpet?
+    then they really avoid water maybe...
+
+- statistics production and consumption separate
+
+- remove iron golem spawning?
+
+- bug: when there is only one bread left, they dont take it but register it as being consumed?!!?!?!?!?
+
+- bij het slapen gaan controleren of er genoeg shit is voor de consumption vd volgende dag! => msg to whole faction
+
+-----------------------+---------------------------------------------------------
+D E S I G N  questions :
+-----------------------+
+
+- multiple storage rooms and multiple mines!
+  => boys zoeken dichstbijzijnde
+
+- separate food 
+  > always eat (also when there's no job)
+
+- make seperate limit for number of path tiles checked
+
+- turn off faction claiming in nether / end (?) (or revise city.world field to city.universe ?)
+
+- alter the achievements (kan dat ?)
+
+- slower walking of villagers?
+
+-----------------------------+---------------------------------------------------------
+V I L L A G E R S  questions :
+-----------------------------+
+
+
+- Deckard Cain : embues items with books for dia instead of XP..
+
+- paper presser
+	
+
+traders:	
+- alchemist		=> pots
+- military officer	=> hire military guard forms ?
+
+- military guards
+
+
+
+
+existing: |
+----------+
+
+- smeltery		=> produces xp bottles for the exp! :)
+
+- sugarcane farmer	
+- book binder		
+- librarian	
+
+- priest
+- blacksmith
+
+- miner
+
+- wood cutter
+- saw miller
+
+- wheat farmer
+- baker
+
+- warehouse
+- contractor
+
+- cow farmer
+- sheep herder
+
+------------------------------------------
+ M I N E R    |
+--------------+
+
+- make rails 'fake' => non-dropping >> also when block below falls
+
+- closeAirSpaceChecker: fix that the metadata next to a railblock or next to the block above a rail block does get set to belonging to the building
+  ==> dont just make the block above rail solid?
+  ==> maybe instead use a railblock with an open trapdoor above it?
+
+- fix grading
+
+- check all TODO's in Miner and in MineUtils!
+
+
+---- maybe:
+
+- fix actual stairs for stairs...
+
+
+- now we stop mining when we have mined 20 blocks (or so) and when resources get low
+  => introduce other stopping conditions!
+    - when # tracks have been put down
+    - when inventory space gets low
+
+- have a small chance to just create a new path from a straight path...
+
+
+------------------------------------------
+ T O W N H A L L |
+-----------------+
+
+IMMIGRATION:
+
+dont destroy first dudes? give bread in chest?
+
+check every night!

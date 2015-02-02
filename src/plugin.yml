@@ -1,0 +1,11 @@
+name: MCity
+main: main.MCity
+description: MCity Minecraft Plugin
+version: 0.9
+author: JB & TK
+depend:
+  - Citizens
+  - Factions
+commands:
+ fv:
+  description: Use /fv to do stuff.

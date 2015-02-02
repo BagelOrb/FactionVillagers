@@ -1,0 +1,476 @@
+keepFactionChunksLoaded: true
+happiness:
+  minSpeed: .2
+  maxSpeed: .8
+  noFoodUnhappinessModifier: 1
+  overcrowdedBasePower: 1.2
+  happinessFromEachUnemployed: 0
+  tempHappinessFromResouce:
+  - ==: happiness.HappinessIfBlockPresent
+    material: RAW_CHICKEN
+    happiness: 2.0
+  commonHappinessEnhancements:
+  - ==: happiness.HappinessIfBlockPresent
+    material: RED_ROSE
+    happiness: 5.0
+  - ==: happiness.HappinessIfBlockPresent
+    material: YELLOW_FLOWER
+    happiness: 5.0    
+  - ==: happiness.HappinessIfBlockPresent
+    material: JUKEBOX
+    happiness: 5.0
+  - ==: happiness.HappinessPerBlock
+    material: EMERALD_BLOCK
+    happiness: 5.0
+  - ==: happiness.HappinessPerBlock
+    material: DIAMOND_BLOCK
+    happiness: 5.0
+  - ==: happiness.HappinessPerBlock
+    material: GOLD_BLOCK
+    happiness: 2.0
+  - ==: happiness.HappinessPerBlock
+    material: LAPIS_BLOCK
+    happiness: 1.0
+  - ==: happiness.HappinessPerBlock
+    material: REDSTONE_BLOCK
+    happiness: 1.0
+  - ==: happiness.HappinessPerBlock
+    material: QUARTZ_BLOCK
+    happiness: 1.0
+  
+building:
+  townHall:
+    numberOfStartingUnemployeds: 4
+    showDebugTrades: false
+    minAirSpace: 80
+    maxAirSpace: 10000
+    materialrequirements: []
+  archery:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  wheatFarm:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  sugarCaneFarm:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  cowFarm:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  chickenFarm:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  sheepFarm:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  woodcutterHut:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  bakery:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+    - FURNACE
+  weavery:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+    - FENCE
+  smeltery:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+    - WORKBENCH
+  bookBindersOffice:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  sawmill:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements:
+    - BED_BLOCK
+  storageRoom:
+    minAirSpace: 12
+    maxAirSpace: 2000
+    materialrequirements: []
+  mine:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements: []
+  minersLodge:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements: 
+    - BED_BLOCK
+  contractorRoom:
+    minAirSpace: 12
+    maxAirSpace: 1000
+    materialrequirements: []
+  blacksmith:
+    minAirSpace: 16
+    maxAirSpace: 1000
+    materialrequirements: []
+  library:
+    minAirSpace: 16
+    maxAirSpace: 1000
+    materialrequirements: []
+
+immigration:
+  lowerFoodMargin: 1.5
+  upperFoodMargin: 2.0
+  timeBetweenImmigrantChecks: 12000 # change to every day at noon?
+  chanceToGetNewUnemployed: .5
+
+character:
+  closeEnoughRange: 2
+  getReadyToWorkDelay: 200
+  doHomeMoveThroughDelay: 100
+  doStorageDelay: 100
+  numberOfNavigationTriesBeforeStuck: 3
+  cantDoActionWaitingTime: 200
+  sleepTime: 16000
+  baker:
+    jobWaitingTime: 300
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WHEAT
+        amount: 8
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: BREAD
+        amount: 4
+    happinessEnhancements: []
+  weaver:
+    jobWaitingTime: 300
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOL
+        amount: 2
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: CARPET
+        amount: 4
+    happinessEnhancements: []
+  smelter:
+    jobWaitingTime: 600
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 6 # true prices (6.7 on average)
+      - ==: org.bukkit.inventory.ItemStack
+        type: IRON_ORE
+        amount: 10 # true prices (on average)
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: IRON_INGOT
+        amount: 10
+      - ==: org.bukkit.inventory.ItemStack
+        type: EXP_BOTTLE
+        amount: 1 # true prices (on average)
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 4 # true prices (4.7 on average)
+      - ==: org.bukkit.inventory.ItemStack
+        type: GOLD_ORE
+        amount: 7 # true prices (on average)
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: GOLD_INGOT
+        amount: 7
+      - ==: org.bukkit.inventory.ItemStack
+        type: EXP_BOTTLE
+        amount: 1 # true prices (on average)
+    happinessEnhancements: []
+  bookBinder:
+    jobWaitingTime: 600
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: SUGAR_CANE
+        amount: 3
+      - ==: org.bukkit.inventory.ItemStack
+        type: LEATHER
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: BOOK
+    happinessEnhancements: []
+  sawmillWorker:
+    jobWaitingTime: 600
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: LOG
+        amount: 4
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 16
+    happinessEnhancements: []
+  wheatFarmer:
+    jobWaitingTime: 20
+    numberOfCollectsPerBatch: 8
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WHEAT
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0
+  sugarCaneFarmer:
+    jobWaitingTime: 20
+    numberOfCollectsPerBatch: 4
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: SUGAR_CANE
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0    
+  cowFarmer:
+    jobWaitingTime: 20
+    numberOfCollectsPerBatch: 2
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WHEAT
+        amount: 2
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: RAW_BEEF
+        amount: 2
+      - ==: org.bukkit.inventory.ItemStack
+        type: LEATHER
+        amount: 2
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0    
+  chickenFarmer:
+    jobWaitingTime: 20
+    numberOfCollectsPerBatch: 3
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: SEEDS
+        amount: 2
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: RAW_CHICKEN
+        amount: 1
+      - ==: org.bukkit.inventory.ItemStack
+        type: FEATHER
+        amount: 1
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0    
+  sheepFarmer:
+    jobWaitingTime: 20
+    numberOfCollectsPerBatch: 4
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOL
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0 
+  woodcutter:
+    jobWaitingTime: 100
+    waitingTimePerTreeBlock: 20
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced:
+      - ==: org.bukkit.inventory.ItemStack
+        type: LOG
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: WORKBENCH
+      happiness: 5.0
+  miner:
+    jobWaitingTime: 20
+    jobRange: 200
+    maxRailsChecked: 1000
+    numberOfCollectsPerBatch: 45
+    minLightLevel: 3
+    mineOrPutWaitingTime: 1
+    chanceToCreateNewPath: 0.05
+    chanceToFixLighting: 0.85
+    chanceToCreateNewPathFromCornerInsteadOfJunction: 0.8
+    chanceToStartStairs: 0.05
+    chanceToKeepMakingStairs: 0.65
+    chanceToKeepDiggingForWard: 0.9
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    - ==: org.bukkit.inventory.ItemStack
+      type: RAW_BEEF
+      amount: 2
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume:
+      - ==: org.bukkit.inventory.ItemStack
+        type: WOOD
+        amount: 32 # TODO: needs to be more!
+      - ==: org.bukkit.inventory.ItemStack
+        type: COBBLESTONE
+        amount: 32 # TODO: needs to be more!
+      - ==: org.bukkit.inventory.ItemStack
+        type: CARPET
+        amount: 32 # TODO: needs to be more!
+      itemsProduced: []
+    happinessEnhancements:
+    - ==: happiness.HappinessIfBlockPresent
+      material: ANVIL
+      happiness: 5.0
+  storageKeeper:
+    jobWaitingTime: 6000
+    itemsNeededToEat: []
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced: []
+    happinessEnhancements: []
+  mineWarden:
+    jobWaitingTime: 6000
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced: []
+    happinessEnhancements: []
+  contractorHelper:
+    jobWaitingTime: 6000
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced: []
+    happinessEnhancements: []
+  blacksmithHelper:
+    jobWaitingTime: 6000
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    - ==: org.bukkit.inventory.ItemStack
+      type: WOOD
+      amount: 8
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced: []
+    happinessEnhancements: []
+  librarianHelper:
+    jobWaitingTime: 6000
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 4
+    - ==: org.bukkit.inventory.ItemStack
+      type: BOOK
+      amount: 2
+    productions:
+    - ==: characters.Production
+      itemsNeededToConsume: []
+      itemsProduced: []
+    happinessEnhancements: []
+  unemployed:
+    jobWaitingTime: 6000
+    itemsNeededToEat:
+    - ==: org.bukkit.inventory.ItemStack
+      type: BREAD
+      amount: 3
+    productions: []
+    happinessEnhancements: []
