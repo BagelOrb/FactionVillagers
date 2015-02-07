@@ -843,6 +843,12 @@ public abstract class ChestCharacter extends Character {
 					if (InventoryTraitUtils.containsAtLeast(inventory, itemNeeded.getType(), itemNeeded.getAmount()))
 						continue;
 					Tuple<List<ItemStack>, List<ItemStack>> gottenNunremoved = fromBuilding.getItem(itemNeeded);
+					if (!gottenNunremoved.snd.isEmpty())
+					{
+						Debug.err("couldn't remove items which were verified to be in the BuildingWithStorage! unremoved:");
+						for (ItemStack is : gottenNunremoved.snd)
+							Debug.out(is.getAmount()+" "+is.getType());
+					}
 					InventoryTraitUtils.addItem(inventory, gottenNunremoved.fst.toArray(new ItemStack[0]));
 				}
 				selectedProduction = production;

@@ -72,6 +72,6 @@ public class Debug {
 	
 
 
-	public static boolean showSearchSpaceDebug = false;
+	public static boolean showSearchSpaceDebug = true;
 	public static boolean showCouldntFindJobDebug = false;
 }

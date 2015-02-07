@@ -74,7 +74,8 @@ public class MineUtils {
     public static boolean isConsumedDuringMiningType(Material mat) {
 		List<Material> mats = Arrays.asList(new Material[]{ 
 				Material.COBBLESTONE,  
-				Material.WOOD
+				Material.WOOD,
+				Material.CARPET
 		});
 		if (mats.contains(mat))
 			return true;
