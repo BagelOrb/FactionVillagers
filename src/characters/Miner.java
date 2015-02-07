@@ -183,6 +183,7 @@ public class Miner extends ChestCharacter {
 					{
 						homeBuilding.city.statistics.consume(homeBuilding, consumed.getType(), consumed.getAmount()); // register consumption
 						couldntRemove.addAll(InventoryTraitUtils.getItem(inventory, consumed).snd);
+						Debug.out("miner removes " +consumed.getAmount() + " "+ consumed.getType()+ "from inv for consumption");
 					}
 				
 				if (!couldntRemove.isEmpty()) 
@@ -454,7 +455,6 @@ public class Miner extends ChestCharacter {
 	}
 
 	private Action doEndPoint(MineFindResult chosenJob) {
-
 		Block fromRail = chosenJob.block;
 		// choose digging direction
 		final BlockFace chosenDiggingDir;
@@ -473,7 +473,7 @@ public class Miner extends ChestCharacter {
 //		boolean canGoLeft = ! MineUtils.isValidRailPosition(bLeft);
 //		boolean canGoRight = ! MineUtils.isValidRailPosition(bRight);
 //		boolean canGoForward = ! MineUtils.isValidRailPosition(bForward);
-
+		
 		BlockFace verticalDir = BlockFace.SELF;
 		if (chosenJob.prevBlock.getY() != chosenJob.block.getY())
 		{
@@ -514,7 +514,9 @@ public class Miner extends ChestCharacter {
 			}
 		}
 		chosenJob.toDirection = chosenDiggingDir;
-	
+
+		Debug.out("doEndPoint in dir "+chosenDiggingDir+ " from "+chosenJob.block.getX()+", "+chosenJob.block.getY()+", "+chosenJob.block.getZ());
+
 		return tryDigging(fromRail, chosenDiggingDir, verticalDir, chosenJob);
 	}
 
@@ -525,6 +527,8 @@ public class Miner extends ChestCharacter {
 		// check whether we can dig
 		Block nextToJobPoint = fromRail.getRelative(chosenDiggingDir);
 		Block toBecomeRail = nextToJobPoint.getRelative(vDir);
+		
+		Debug.out("tryDigging > toBecomeRail = "+toBecomeRail.getX()+", "+toBecomeRail.getY()+", "+toBecomeRail.getZ());
 		
 		boolean canDig = MineUtils.isValidRailPosition(toBecomeRail) 
 				&& MineUtils.canMakeMine(toBecomeRail, chosenDiggingDir, Miner.this.homeBuilding.city.getFaction())
@@ -592,22 +596,35 @@ public class Miner extends ChestCharacter {
 				Block from = firstChangable.fst;
 				BlockMatState to = firstChangable.snd;
 				
+				if (to.mat == Material.CARPET)
+					Debug.out("changing "+from.getX()+","+from.getY()+","+from.getZ()+" to carpetje");
+				
 				if (BlockUtils.isRailType(from.getType()))
-					return mineAndMake(chosenJob, blockChangables); 
+				{
+					Debug.out("from is rail type!");
+					return mineAndMake(chosenJob, blockChangables);
+				}
 				// TODO what if it needs to replace rail with a block?!
 				
 				if (!WalkingGroundUtils.isValidWalkingAirBlockOrGate(from))
+				{
+					Debug.out("from is not valid walking ground!");
 					mineBlock(from);
-				
+				}
 				boolean hasBlockToPut = putBlock(from, to);
 				
 				if (!hasBlockToPut)
+				{
+					Debug.out("didn't put block!");
 					return getNextJobAction(chosenJob, true); 
-				
+				}
 				if (isFinishedMining()) // TODO: check if inventory is full??
+				{
+					Debug.out("finished mining!");
 					return getToMineBuildingNavigatorAction(chosenJob.block);
-				
+				}
 				// otherwise: 
+				Debug.out("next blockChangable");
 				return mineAndMake(chosenJob, blockChangables);
 			}
 			
@@ -704,7 +721,10 @@ public class Miner extends ChestCharacter {
 				toTakeFromInv = new ItemStack(Material.AIR, 0);
 			}
 			if (!InventoryTraitUtils.containsAtLeast(inventory, toTakeFromInv.getType(), toTakeFromInv.getAmount()))
+			{
+				Debug.out("inv didnt have "+toTakeFromInv.getAmount()+" "+toTakeFromInv.getType()+"!");
 				return false;
+			}
 			Tuple<List<ItemStack>, List<ItemStack>> gottenNunremoved = InventoryTraitUtils.get(inventory, toTakeFromInv.getType(), toTakeFromInv.getAmount());
 			homeBuilding.city.statistics.consume(homeBuilding, toTakeFromInv.getType(), toTakeFromInv.getAmount());
 
