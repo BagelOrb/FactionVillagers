@@ -14,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.inventory.ItemStack;
 
 import utils.BlockChecker;
@@ -197,6 +198,15 @@ public class Miner extends ChestCharacter {
 	@Override
 	Action doJob() { // when arrived at mine
 //		consume();
+		
+//		Debug.out("Miner inv content: ");
+//		for (ItemStack is : inventory.getContents())
+//		{
+//			if (is == null)
+//				Debug.out("none");
+//			else
+//				Debug.out(is.getAmount()+" " +is.getType());
+//		}
 		
 		Mine mine = homeBuilding.city.mine;
 		boolean isActive = mine.recheckAndShowMessage(null, false, true);
@@ -521,7 +531,7 @@ public class Miner extends ChestCharacter {
 	}
 
 	
-	
+	enum MineStopReason { INTERRUPTS_OTHER_MINE, BRIDGE_TOO_HIGH, NONE, BUILDING, OTHER_FACTION_TERRAIN, UNMINABLE_TYPE, TOO_MANY_RAILS_HERE, HAS_COBBLE_WALL }; 
 	
 	private Action tryDigging(Block fromRail, BlockFace chosenDiggingDir, BlockFace vDir, MineFindResult chosenJob) {
 		// check whether we can dig
@@ -530,12 +540,18 @@ public class Miner extends ChestCharacter {
 		
 		Debug.out("tryDigging > toBecomeRail = "+toBecomeRail.getX()+", "+toBecomeRail.getY()+", "+toBecomeRail.getZ());
 		
-		boolean canDig = MineUtils.isValidRailPosition(toBecomeRail) 
-				&& MineUtils.canMakeMine(toBecomeRail, chosenDiggingDir, Miner.this.homeBuilding.city.getFaction())
-				&& (toBecomeRail.getY()<maxMiningY || MineUtils.hasGround(toBecomeRail, chosenDiggingDir));
+		MineStopReason mineStopReason = MineUtils.canMakeMine(toBecomeRail, chosenDiggingDir, Miner.this.homeBuilding.city.getFaction());
+		if (mineStopReason == MineStopReason.NONE && !MineUtils.isValidRailPosition(toBecomeRail))
+			mineStopReason = MineStopReason.INTERRUPTS_OTHER_MINE;
+		if (mineStopReason == MineStopReason.NONE && toBecomeRail.getY() >= maxMiningY && !MineUtils.hasGround(toBecomeRail, chosenDiggingDir))
+			mineStopReason = MineStopReason.BRIDGE_TOO_HIGH;
+			
+		
+		boolean canDig = mineStopReason == MineStopReason.NONE;
 		if (!canDig)
 		{
-			if (! BlockUtils.isMiningStop(nextToJobPoint.getType()))
+			if (! BlockUtils.isMiningStop(nextToJobPoint.getType()) 
+					&& mineStopReason != MineStopReason.HAS_COBBLE_WALL)
 			{
 				if (BlockUtils.isRailType(nextToJobPoint.getType()) 
 						|| BlockUtils.isRailType(nextToJobPoint.getRelative(BlockFace.DOWN).getType()) )
@@ -544,7 +560,62 @@ public class Miner extends ChestCharacter {
 				{
 					boolean hasBlockToPut = putBlock(nextToJobPoint, new BlockMatState(Material.COBBLE_WALL,-1));
 					if (!hasBlockToPut)
-						return getNextJobAction(chosenJob, true); 
+						return getNextJobAction(chosenJob, true); // no shite to make cobble wall, continue...
+					
+					Block signBlock = nextToJobPoint.getRelative(BlockFace.UP);
+					hasBlockToPut = putBlock(signBlock, new BlockMatState(Material.SIGN_POST,-1));
+					if (hasBlockToPut)
+					{
+						org.bukkit.material.Sign matSign  = new org.bukkit.material.Sign(Material.SIGN_POST);
+						Sign sign = (Sign) nextToJobPoint.getRelative(BlockFace.UP).getState();
+						matSign.setFacingDirection(chosenDiggingDir.getOppositeFace());
+						sign.setData(matSign);
+						switch (mineStopReason)
+						{
+						case BRIDGE_TOO_HIGH:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(2, "Jumping");
+							sign.setLine(3, "discouraged!");
+							break;
+						case INTERRUPTS_OTHER_MINE:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "Tunnel ahead!");
+							break;
+						case BUILDING:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "Private");
+							sign.setLine(2, "proterty!");
+							break;
+						case NONE:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(2, "Cobble wall!");
+							break;
+						case OTHER_FACTION_TERRAIN:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "Enemy");
+							sign.setLine(2, "terrain!");
+							break;
+						case TOO_MANY_RAILS_HERE:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "Sharp corner!");
+							break;
+						case UNMINABLE_TYPE:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "No diggity!");
+							break;
+						case HAS_COBBLE_WALL:
+							sign.setLine(0, "CAUTION!");
+							sign.setLine(1, "See other");
+							sign.setLine(2, "sign!");
+							break;
+						default:
+							break;			
+						}
+						sign.update();
+						
+					}
+					else
+						return getNextJobAction(chosenJob, true); // no shite to make cobble wall, continue...
 				}
 			}
 			else
@@ -608,7 +679,6 @@ public class Miner extends ChestCharacter {
 				
 				if (!WalkingGroundUtils.isValidWalkingAirBlockOrGate(from))
 				{
-					Debug.out("from is not valid walking ground!");
 					mineBlock(from);
 				}
 				boolean hasBlockToPut = putBlock(from, to);
@@ -624,7 +694,6 @@ public class Miner extends ChestCharacter {
 					return getToMineBuildingNavigatorAction(chosenJob.block);
 				}
 				// otherwise: 
-				Debug.out("next blockChangable");
 				return mineAndMake(chosenJob, blockChangables);
 			}
 			
@@ -697,6 +766,9 @@ public class Miner extends ChestCharacter {
 			switch(to.mat) {
 			case COBBLE_WALL:
 				toTakeFromInv = new ItemStack(Material.COBBLESTONE, 1);
+				break;
+			case SIGN_POST:
+				toTakeFromInv = new ItemStack(Material.WOOD, 2);
 				break;
 			case COBBLESTONE:
 				toTakeFromInv = new ItemStack(Material.COBBLESTONE, 1);

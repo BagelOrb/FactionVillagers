@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Stack;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -25,7 +26,7 @@ import characters.ShowBlockChange;
 public class UberToolsListener implements Listener
 {
 
-	public static final String[] tools = new String[]{"select", "setSelectionAsType", "xray", "destroyConnected", "recheckBuilding", "somethingDebug", "blockInfo"};
+	public static final String[] tools = new String[]{"select", "setSelectionAsType", "xray", "destroyConnected", "recheckBuilding", "somethingDebug", "blockInfo", "fillMine"};
 	
 	static HashMap<Player, Block> selectedLeft = new HashMap<Player, Block>();
 	static HashMap<Player, Block> selectedRight = new HashMap<Player, Block> ();
@@ -107,6 +108,7 @@ public class UberToolsListener implements Listener
 //				player.sendMessage("block is fake!!!");
 //			}
 			break;
+
 		default:
 			return;
 		}
@@ -140,6 +142,34 @@ public class UberToolsListener implements Listener
 			HashSet<Block> connectedBlocks = BlockUtils.getAllConnectedBlocksOfSameType(block, 1000);
 			for (Block b : connectedBlocks)
 				b.setType(Material.AIR);
+			break;
+		case "fillMine":
+			HashSet<Block> carpets = new HashSet<Block>();
+			Stack<Block> todo = new Stack<Block>();
+			todo.add(block);
+			while (!todo.isEmpty())
+			{
+				Block now = todo.pop();
+				for (int x = -1; x <=1; x++)
+					for (int z = -1; z <=1; z++)
+						for (int y = -1; y <=2; y++)				
+						{
+							Block near = now.getRelative(x,y,z);
+							if (near.getType() == Material.CARPET && !carpets.contains(near))
+							{
+								todo.add(near);
+								carpets.add(near);
+							}
+							
+						}
+			}
+			
+			for (Block carpet : carpets)
+				for (int x = -1; x <=1; x++)
+					for (int z = -1; z <=1; z++)
+						for (int y = -1; y <=2; y++)
+							carpet.getRelative(x, y, z).setType(Material.STONE);
+						
 			break;
 		default:
 			return;

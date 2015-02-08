@@ -378,11 +378,11 @@ character:
     numberOfCollectsPerBatch: 45
     minLightLevel: 3
     mineOrPutWaitingTime: 1
-    chanceToCreateNewPath: 0.05
+    chanceToCreateNewPath: 0.03
     chanceToFixLighting: 0.85
     chanceToCreateNewPathFromCornerInsteadOfJunction: 0.8
     chanceToStartStairs: 0.05
-    chanceToKeepMakingStairs: 0.65
+    chanceToKeepMakingStairs: 0.85 # P = .5 @ 5 blocks , expected = 6.67 blocks
     chanceToKeepDiggingForWard: 0.9
     itemsNeededToEat:
     - ==: org.bukkit.inventory.ItemStack

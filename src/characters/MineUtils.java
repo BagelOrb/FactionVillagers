@@ -20,6 +20,7 @@ import utils.BlockUtils;
 import utils.WalkingGroundUtils;
 import buildings.MetaDataUtils;
 import characters.MineUtils.MineFindResult.Sort;
+import characters.Miner.MineStopReason;
 import characters.Navigator.GoAndDo;
 
 import com.massivecraft.factions.entity.Faction;
@@ -693,7 +694,7 @@ public class MineUtils {
 	 */
 	public static LinkedList<Tuple<Block, BlockMatState>> neededToMakeMine(Block toBecomeRail, BlockFace dir, Faction fac) {
 		LinkedList<Tuple<Block, BlockMatState>> ret = new LinkedList<Tuple<Block, BlockMatState>> ();
-		if (!canMakeMine(toBecomeRail, dir, fac))
+		if (canMakeMine(toBecomeRail, dir, fac) != MineStopReason.NONE)
 			return ret;
 		
 		// this step mining
@@ -744,8 +745,8 @@ public class MineUtils {
 		return ret; 
 	}
 	
-	public static boolean canMakeMine(Block toBecomeRail, BlockFace dir, Faction fac) {
-
+	public static MineStopReason canMakeMine(Block toBecomeRail, BlockFace dir, Faction fac) {
+		boolean hasStopBlock = false;
 		// check the bare essentials
 		XZranges ranges1 = new XZranges(toBecomeRail, dir, 0);
 		for (int y = toBecomeRail.getY(); y <= toBecomeRail.getY()+2; y++)
@@ -761,7 +762,9 @@ public class MineUtils {
 							continue;
 						else 
 						{
-							return false;
+							if (block.getType() == Material.COBBLE_WALL)
+								hasStopBlock = true;
+							return MineStopReason.UNMINABLE_TYPE;
 						}
 					}
 				}
@@ -773,15 +776,15 @@ public class MineUtils {
 					Block block = toBecomeRail.getWorld().getBlockAt(x, y, z);
 					if (!FactionUtils.canBuildOn(fac, block))
 					{
-						return false;
+						return MineStopReason.OTHER_FACTION_TERRAIN;
 					}
 					if (block.getType() == Material.BEDROCK || block.getType() == Material.OBSIDIAN)
 					{
-						return false;
+						return MineStopReason.UNMINABLE_TYPE;
 					}
 					if (MetaDataUtils.getBuildings(block).size() > 0)
 					{
-						return false;
+						return MineStopReason.BUILDING;
 					}
 				}
 
@@ -789,10 +792,13 @@ public class MineUtils {
 		
 		if (willConnectToOtherTunnelOnDifferentLevel(toBecomeRail, dir, ranges))
 		{
-			return false;
+			return MineStopReason.INTERRUPTS_OTHER_MINE;
 		}
 		
-		return true; // otherwise 
+		if (hasStopBlock)
+			return MineStopReason.HAS_COBBLE_WALL;
+		
+		return MineStopReason.NONE; // otherwise 
 	}
 	
 	public static boolean willConnectToOtherTunnelOnDifferentLevel(Block toBecomeRail, BlockFace direction, XZranges ranges) {
