@@ -826,8 +826,6 @@ public abstract class ChestCharacter extends Character {
 	
 	
 	public boolean getConsumption(BuildingWithStorage fromBuilding) {
-		if (industrious) return true;
-		
 		for (Production production : productions)
 		{
 			boolean hasConsumption = true;

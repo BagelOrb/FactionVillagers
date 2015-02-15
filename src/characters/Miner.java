@@ -496,8 +496,8 @@ public class Miner extends ChestCharacter {
 				{
 					double rand = rnd.nextDouble();
 					Debug.out("random val for chanceToKeepMakingStairs = "+rand);
-					Debug.out("check val for chanceToKeepMakingStairs = "+(chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/30))));
-					if (rand < chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/30)))
+					Debug.out("check val for chanceToKeepMakingStairs = "+(chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/50))));
+					if (rand < chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/50)))
 						verticalDir = BlockFace.DOWN;
 				} else
 					verticalDir = BlockFace.SELF;
