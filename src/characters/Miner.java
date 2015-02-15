@@ -488,12 +488,18 @@ public class Miner extends ChestCharacter {
 		if (chosenJob.prevBlock.getY() != chosenJob.block.getY())
 		{
 			chosenDiggingDir = chosenJob.fromDirection.getOppositeFace();
-			if (rnd.nextDouble() < chanceToKeepMakingStairs)
 				if (chosenJob.prevBlock.getY() == chosenJob.block.getY()-1)
-					verticalDir = BlockFace.UP;
-				else if (chosenJob.prevBlock.getY() == chosenJob.block.getY()+1)
-					verticalDir = BlockFace.DOWN;
-				else
+				{
+					if (rnd.nextDouble() < chanceToKeepMakingStairs)
+						verticalDir = BlockFace.UP;
+				} else if (chosenJob.prevBlock.getY() == chosenJob.block.getY()+1)
+				{
+					double rand = rnd.nextDouble();
+					Debug.out("random val for chanceToKeepMakingStairs = "+rand);
+					Debug.out("check val for chanceToKeepMakingStairs = "+(chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/30))));
+					if (rand < chanceToKeepMakingStairs + (1-chanceToKeepMakingStairs)*(-Math.expm1(-chosenJob.block.getY()/30)))
+						verticalDir = BlockFace.DOWN;
+				} else
 					verticalDir = BlockFace.SELF;
 		}
 		else
@@ -667,8 +673,8 @@ public class Miner extends ChestCharacter {
 				Block from = firstChangable.fst;
 				BlockMatState to = firstChangable.snd;
 				
-				if (to.mat == Material.CARPET)
-					Debug.out("changing "+from.getX()+","+from.getY()+","+from.getZ()+" to carpetje");
+				if (to.mat == MineUtils.MinePathMat)
+					Debug.out("changing "+from.getX()+","+from.getY()+","+from.getZ()+" to mine path");
 				
 				if (BlockUtils.isRailType(from.getType()))
 				{
@@ -784,6 +790,9 @@ public class Miner extends ChestCharacter {
 				break;
 			case CARPET:
 				toTakeFromInv = new ItemStack(Material.CARPET, 1);
+				break;
+			case RAILS:
+				toTakeFromInv = new ItemStack(Material.RAILS, 1);
 				break;
 //			case AIR:
 //				toTakeFromInv = new ItemStack(Material.AIR, 0);

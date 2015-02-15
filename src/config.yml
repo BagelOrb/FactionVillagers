@@ -382,7 +382,7 @@ character:
     chanceToFixLighting: 0.85
     chanceToCreateNewPathFromCornerInsteadOfJunction: 0.8
     chanceToStartStairs: 0.05
-    chanceToKeepMakingStairs: 0.85 # P = .5 @ 5 blocks , expected = 6.67 blocks
+    chanceToKeepMakingStairs: 0.75 # for 0.85 P = .5 @ 5 blocks , expected = 6.67 blocks
     chanceToKeepDiggingForWard: 0.9
     itemsNeededToEat:
     - ==: org.bukkit.inventory.ItemStack

@@ -29,6 +29,8 @@ public class MineUtils {
 	static int maxNumberOfBlocksOnPathBetweenWaypPoints = 5;
 	private static int pathBlocksBetweenLightings = 6;
 
+	static final Material MinePathMat = Material.CARPET; // RAILS; // 
+	
     public static boolean isMinableType(Material mat) {
 		List<Material> mats = Arrays.asList(new Material[]{ 
 				Material.COBBLESTONE,  
@@ -76,7 +78,7 @@ public class MineUtils {
 		List<Material> mats = Arrays.asList(new Material[]{ 
 				Material.COBBLESTONE,  
 				Material.WOOD,
-				Material.CARPET
+				MinePathMat
 		});
 		if (mats.contains(mat))
 			return true;
@@ -741,7 +743,7 @@ public class MineUtils {
 			}
 		
 		
-		ret.add(new Tuple<Block, BlockMatState>(toBecomeRail, new BlockMatState(Material.CARPET, 15)));
+		ret.add(new Tuple<Block, BlockMatState>(toBecomeRail, new BlockMatState(MinePathMat, 15)));
 		return ret; 
 	}
 	

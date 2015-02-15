@@ -34,6 +34,8 @@ import com.massivecraft.massivecore.util.Txt;
 
 public abstract class ChestCharacter extends Character {
 
+	public static boolean industrious = false;
+	
 	private static final int getReadyToWorkDelay = plugin.getConfig().getInt("character.getReadyToWorkDelay");
 	private static final int doHomeMoveThroughDelay = plugin.getConfig().getInt("character.doHomeMoveThroughDelay");
 	private static final int doStorageDelay = plugin.getConfig().getInt("character.doStorageDelay");
@@ -604,7 +606,7 @@ public abstract class ChestCharacter extends Character {
 	}
 
 	Action goDoJobIfPossible() {
-		if(homeBuilding.startingBlock.getWorld().getTime() > sleepTime && homeBuilding.startingBlock.getWorld().getTime() < 23000)
+		if(!industrious && homeBuilding.startingBlock.getWorld().getTime() > sleepTime && homeBuilding.startingBlock.getWorld().getTime() < 23000)
 		{
 			return sleepAtHome;
 		}
@@ -824,7 +826,8 @@ public abstract class ChestCharacter extends Character {
 	
 	
 	public boolean getConsumption(BuildingWithStorage fromBuilding) {
-
+		if (industrious) return true;
+		
 		for (Production production : productions)
 		{
 			boolean hasConsumption = true;

@@ -18,6 +18,7 @@ public class CmdFactionVillagers extends FVCommand {
 	public CmdFactionVillagersUberTools cmdFactionVillagersUberTools = new CmdFactionVillagersUberTools();
 	public CmdFactionVillagersSpawnSteve cmdFactionVillagersSpawnSteve = new CmdFactionVillagersSpawnSteve();
 	public CmdFactionVillagersFullStack CmdFactionVillagersFullStack = new CmdFactionVillagersFullStack();
+	public CmdFactionVillagersIndustriousVillagers CmdFactionVillagersIndustriousVillagers = new CmdFactionVillagersIndustriousVillagers();
 	
 	
 	public CmdFactionVillagers()
@@ -34,6 +35,7 @@ public class CmdFactionVillagers extends FVCommand {
 		this.addSubCommand(this.cmdFactionVillagersUberTools);
 		this.addSubCommand(this.cmdFactionVillagersSpawnSteve);
 		this.addSubCommand(this.CmdFactionVillagersFullStack);
+		this.addSubCommand(this.CmdFactionVillagersIndustriousVillagers);
 		
 		this.setDesc(" gives access to factionvillagers commands");
 		this.setHelp("This command is used for factionvillagers commands");
