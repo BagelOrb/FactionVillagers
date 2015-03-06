@@ -312,7 +312,13 @@ public class City implements JsonAble<City> {
 		}
 		double crowdedness = Math.pow(overcrowdedBasePower, numberOfEmployeds) -1;
 		
-		double laziness = townHall.pool.size() * happinessFromEachUnemployed;
+		// TODO: Check of dit nog goed is hieronder, heb ff quick gefixt..
+		double laziness = 0;
+		if(getTownHallPool() != null)
+		{
+			laziness = townHall.pool.size() * happinessFromEachUnemployed; //Hier zat n nullpointer...
+		}
+		
 		return laziness-crowdedness;
 	}
 }

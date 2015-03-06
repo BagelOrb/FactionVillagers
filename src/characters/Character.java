@@ -14,7 +14,6 @@ import net.citizensnpcs.api.ai.event.NavigationCompleteEvent;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.Trait;
 import net.citizensnpcs.api.util.DataKey;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -324,10 +323,27 @@ public abstract class Character extends Trait {
 			}
 		};
 	}
+	
+	public void decideNextAction(long delay) {
+			new BukkitRunnable(){
+
+			@Override
+			public void run() {
+				decideNextAction();
+			}}.runTaskLater(FactionVillagers.getCurrentPlugin(), delay);
+	}
 
 	public void decideNextAction() {
-			
-			if(nextLocation.distance(npc.getEntity().getLocation()) > closeEnoughRange) //Can't reach
+		Location currentLocation = npc.getEntity().getLocation();
+		
+		if(!currentLocation.getChunk().isLoaded() || !nextLocation.getChunk().isLoaded())
+		{
+			Debug.out(this.getName()+"'s location or next location is in an unloaded chunk!");
+			decideNextAction(10);
+		}
+		else
+		{
+			if(nextLocation.distanceSquared(currentLocation) > closeEnoughRange * closeEnoughRange) //Can't reach
 			{
 				if (numberOfNavigationTries < numberOfNavigationTriesBeforeStuck)
 				{
@@ -335,7 +351,7 @@ public abstract class Character extends Trait {
 					{
 	//					Location inBetween = this.getNPC().getEntity().getLocation().add(nextLocation).multiply(.5);
 	//					Block blockInBetween = inBetween.getWorld().getBlockAt(inBetween);
-						Block blockInBetween = nextLocation.getWorld().getBlockAt( this.getNPC().getEntity().getLocation());
+						Block blockInBetween = nextLocation.getWorld().getBlockAt(currentLocation);
 						if (BlockUtils.isGateType(blockInBetween.getType()))
 						{
 							BlockUtils.setGateOpen(blockInBetween, true);
@@ -377,6 +393,7 @@ public abstract class Character extends Trait {
 					ShowBlockChange.showAs(nextLocation.getWorld().getBlockAt(nextLocation), Material.RED_ROSE, playersToShowSearchSpace, 100);
 			}
 		}
+	}
 
 	public void rerouteVia(Location loc) {
 		delayCurrentAction(GoAndDo.newNoAction(loc));
